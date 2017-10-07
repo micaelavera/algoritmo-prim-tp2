@@ -51,6 +51,7 @@ public class Localidad extends JFrame {
 	public Localidad() {
 		setTitle("Ingreso de datos");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Localidad.class.getResource("/imagenes/icono_ubicacion.png")));
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(400,200, 492, 250);
 		

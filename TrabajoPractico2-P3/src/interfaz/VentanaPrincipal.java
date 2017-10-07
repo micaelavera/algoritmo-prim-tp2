@@ -30,7 +30,6 @@ public class VentanaPrincipal implements MouseListener {
 
 	private JFrame frame;
 	private JMapViewer mapa;
-//	private boolean ingresarDatos;
 	private static Mapa grafo;
 	
 	/**
@@ -69,8 +68,6 @@ public class VentanaPrincipal implements MouseListener {
 		
 		mapa=new JMapViewer();
 		grafo=new Mapa(this);
-		
-//		ingresarDatos=false;
 		
 		//Se posiciona en las coordenadas geográficas de Argentina
 		mapa.setDisplayPositionByLatLon(-33.123827, -60.354550, 5); 
