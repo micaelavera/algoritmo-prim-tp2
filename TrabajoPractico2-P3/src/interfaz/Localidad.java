@@ -62,7 +62,6 @@ public class Localidad extends JFrame {
 		
 		validandoDatos=false;
 	
-		
 		panelLocalidad = new JPanel();
 		panelLocalidad.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panelLocalidad);
@@ -79,7 +78,6 @@ public class Localidad extends JFrame {
 		cantHabitantes.setBounds(30, 105, 142, 14);
 		panelLocalidad.add(cantHabitantes);
 	
-		
 		comboBoxHabitantes = new JComboBox<String>();
 		comboBoxHabitantes.setBounds(200, 102, 238, 20);
 		comboBoxHabitantes.setBackground(Color.WHITE);
@@ -100,9 +98,8 @@ public class Localidad extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				validarDatos();
 				if(validandoDatos==true){
-//				Coordenadas.main(null);
-				dispose();
-				JOptionPane.showMessageDialog(null, "Marque en el mapa las coordenadas","Mensaje",JOptionPane.INFORMATION_MESSAGE);	
+					dispose();
+					JOptionPane.showMessageDialog(null, "Marque en el mapa las coordenadas","Mensaje",JOptionPane.INFORMATION_MESSAGE);	
 				}	
 			}
 		});
@@ -113,13 +110,13 @@ public class Localidad extends JFrame {
 
 	public void validarDatos(){
 		if(textLocalidad.getText().equals("") || textProvincia.getText().equals("")|| comboBoxHabitantes.getSelectedItem().equals(null)){
-				JOptionPane.showMessageDialog(null,"Es obligatorio la carga de todos los datos", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-				validandoDatos=false;
+			JOptionPane.showMessageDialog(null,"Es obligatorio la carga de todos los datos", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+			validandoDatos=false;
 		}else{
 //			JOptionPane.showMessageDialog(null, "Procesando la información","Mensaje",JOptionPane.INFORMATION_MESSAGE);
 			validandoDatos=true;
 		}
-		}
+	}
 	
 	
 	public JTextField getTextLocalidad() {

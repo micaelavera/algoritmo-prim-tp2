@@ -31,17 +31,15 @@ public class Mapa {
 					color=Color.RED; 
 				}else{
 					color=Color.GREEN; 
-					Coordinate puntoActual=coordenadas.get(i);
-					MapMarkerDot marker=new MapMarkerDot(puntoActual);
-					marker.getStyle().setBackColor(color);
-					marker.setName(localidad.getTextLocalidad().getText());
-					mapa.addMapMarker(marker);
-					
 				}
+			Coordinate puntoActual=coordenadas.get(i);
+			MapMarkerDot marker=new MapMarkerDot(puntoActual);
+			marker.getStyle().setBackColor(color);
+			marker.setName(localidad.getTextLocalidad().getText());
+			mapa.addMapMarker(marker);		
 			}
 		}
 	}
-
 	
 	public ArrayList<Coordinate> getCoordenadas() {
 		return coordenadas;

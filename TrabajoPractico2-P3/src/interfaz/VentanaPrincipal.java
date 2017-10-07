@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -26,12 +27,12 @@ import interfaz.Localidad;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public class VentanaPrincipal implements MouseListener {
+public class VentanaPrincipal {
 
 	private JFrame frame;
 	private JMapViewer mapa;
 	private static Mapa grafo;
-	
+	boolean ingresarPunto=false;
 	/**
 	 * Launch the application.
 	 */
@@ -67,6 +68,7 @@ public class VentanaPrincipal implements MouseListener {
 		frame.getContentPane().setLayout(null);
 		
 		mapa=new JMapViewer();
+		
 		grafo=new Mapa(this);
 		
 		//Se posiciona en las coordenadas geográficas de Argentina
@@ -95,7 +97,6 @@ public class VentanaPrincipal implements MouseListener {
 		botonAGM.setFont(new Font("Consolas", Font.PLAIN, 12));
 		botonAGM.setBounds(10, 106, 161, 23);
 		panel.add(botonAGM);
-		
 		botonAGM.setEnabled(false); 
 		
 		JLabel lblCostoTotal = new JLabel("Costo Total");
@@ -104,47 +105,21 @@ public class VentanaPrincipal implements MouseListener {
 		lblCostoTotal.setBounds(22, 430, 122, 33);
 		panel.add(lblCostoTotal);
 		
-		
-		mapa.addMouseListener(this);
-		
+		mapa.addMouseListener(new MouseAdapter() {
+			@Override
+            public void mouseClicked(MouseEvent e) {
+               if (e.getButton() == MouseEvent.BUTTON1) {
+                grafo.getCoordenadas().add(mapa.getPosition(e.getPoint()));
+    	        grafo.agregarLocalidad();
+                }
+			}
+		});
 	}
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			//Al hacer click sobre el mapa, se localiza el punto (longitud y latitud) y se lo agrega al array de coordenadas
-	        if (e.getButton()==1) {
-	          	grafo.getCoordenadas().add(mapa.getPosition(e.getPoint()));
-	           	grafo.agregarLocalidad();
-	        }
-	    }
-		
+
 		public JMapViewer getMapa() {
 			return mapa;
 		}
 		
 
-		@Override
-		public void mouseExited(MouseEvent e) {
-			
-		}
 
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		
-
-		@Override
-		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-}
-
+	}
