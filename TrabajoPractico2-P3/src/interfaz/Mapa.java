@@ -8,7 +8,6 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
 import interfaz.VentanaPrincipal;
-
 import interfaz.Localidad;
 
 public class Mapa {
@@ -39,6 +38,7 @@ public class Mapa {
 			mapa.addMapMarker(marker);		
 			}
 		}
+		
 	}
 	
 	public ArrayList<Coordinate> getCoordenadas() {

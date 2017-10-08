@@ -6,8 +6,10 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
-import org.openstreetmap.gui.jmapviewer.Coordinate;
+
+
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
+
 
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
@@ -18,11 +20,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import interfaz.Mapa;
-import interfaz.Localidad;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -32,7 +31,7 @@ public class VentanaPrincipal {
 	private JFrame frame;
 	private JMapViewer mapa;
 	private static Mapa grafo;
-	boolean ingresarPunto=false;
+	private boolean ingresarPunto;
 	/**
 	 * Launch the application.
 	 */
@@ -67,8 +66,9 @@ public class VentanaPrincipal {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		mapa=new JMapViewer();
+		ingresarPunto=false;
 		
+		mapa=new JMapViewer();
 		grafo=new Mapa(this);
 		
 		//Se posiciona en las coordenadas geográficas de Argentina
@@ -88,7 +88,9 @@ public class VentanaPrincipal {
 		botonLocalidad.setBounds(10, 49, 161, 23);
 		botonLocalidad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Localidad.main(null);
+				Localidad localidad = new Localidad();
+				localidad.setVisible(true);
+				ingresarPunto=true;
 			}
 		});
 		panel.add(botonLocalidad);
@@ -108,11 +110,12 @@ public class VentanaPrincipal {
 		mapa.addMouseListener(new MouseAdapter() {
 			@Override
             public void mouseClicked(MouseEvent e) {
+				if(ingresarPunto==true){
                if (e.getButton() == MouseEvent.BUTTON1) {
                 grafo.getCoordenadas().add(mapa.getPosition(e.getPoint()));
     	        grafo.agregarLocalidad();
                 }
-			}
+			}}
 		});
 	}
 
