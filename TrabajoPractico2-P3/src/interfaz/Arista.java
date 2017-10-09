@@ -22,9 +22,11 @@ public class Arista {
 
 	private void verificarCoordenadas(Coordinate a, Coordinate b) {
 		if(a==null || b==null){
-			 throw new RuntimeException("Null cordinate");
+			 throw new RuntimeException("Null coordinate");
 		}
 	}
+	
+	
 	
 	public void poligono(JMapViewer mapa) {
         ArrayList<Coordinate> coordenadas2 = new ArrayList<> ();

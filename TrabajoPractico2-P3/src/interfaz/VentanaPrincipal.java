@@ -30,8 +30,9 @@ public class VentanaPrincipal {
 
 	private JFrame frame;
 	private JMapViewer mapa;
-	private static Mapa grafo;
+	private Mapa grafo;
 	private boolean ingresarPunto;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -96,26 +97,34 @@ public class VentanaPrincipal {
 		panel.add(botonLocalidad);
 		
 		JButton botonAGM = new JButton("Calcular AGM");
+		botonAGM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		botonAGM.setFont(new Font("Consolas", Font.PLAIN, 12));
 		botonAGM.setBounds(10, 106, 161, 23);
 		panel.add(botonAGM);
 		botonAGM.setEnabled(false); 
 		
-		JLabel lblCostoTotal = new JLabel("Costo Total");
+		JLabel lblCostoTotal = new JLabel("Costo Total:");
 		lblCostoTotal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCostoTotal.setFont(new Font("Consolas", Font.BOLD, 15));
 		lblCostoTotal.setBounds(22, 430, 122, 33);
 		panel.add(lblCostoTotal);
 		
 		mapa.addMouseListener(new MouseAdapter() {
-			@Override
-            public void mouseClicked(MouseEvent e) {
-				if(ingresarPunto==true){
-               if (e.getButton() == MouseEvent.BUTTON1) {
-                grafo.getCoordenadas().add(mapa.getPosition(e.getPoint()));
-    	        grafo.agregarLocalidad();
-                }
-			}}
+		@Override
+        public void mouseClicked(MouseEvent e) {
+			if(ingresarPunto==true){
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					grafo.getCoordenadas().add(mapa.getPosition(e.getPoint()));
+					grafo.agregarLocalidad();
+					ingresarPunto=false;
+                }	
+			}
+		}
+			
 		});
 	}
 

@@ -9,16 +9,19 @@ import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
 import interfaz.VentanaPrincipal;
 import interfaz.Localidad;
+import interfaz.Arista;
 
 public class Mapa {
 	
 	private ArrayList<Coordinate> coordenadas;
 	private JMapViewer mapa;
 	private Localidad localidad;
+//	private ArrayList<Arista> aristas;
 	
 	public Mapa(VentanaPrincipal ventana){
 		coordenadas=new ArrayList<>();
 		localidad=new Localidad();
+//		aristas=new ArrayList<>();
 		mapa= ventana.getMapa();
 	}
 	
@@ -34,16 +37,20 @@ public class Mapa {
 			Coordinate puntoActual=coordenadas.get(i);
 			MapMarkerDot marker=new MapMarkerDot(puntoActual);
 			marker.getStyle().setBackColor(color);
-			marker.setName(localidad.getTextLocalidad().getText());
+//			marker.setName(localidad.getTextLocalidad().getText());
 			mapa.addMapMarker(marker);		
 			}
-		}
-		
+		}	
 	}
 	
 	public ArrayList<Coordinate> getCoordenadas() {
 		return coordenadas;
 	}
+	
+	
+	
+	
+	
 	
 	
 }

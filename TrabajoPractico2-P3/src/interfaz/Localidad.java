@@ -20,18 +20,13 @@ import javax.swing.JComboBox;
 
 public class Localidad extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textProvincia;
 	private static JTextField textLocalidad;
+	private JComboBox<String> comboBoxHabitantes; 
 	private boolean validandoDatos;
 	
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		try {
 			Localidad dialog = new Localidad();
@@ -96,7 +91,7 @@ public class Localidad extends JDialog {
 		cantidadHabitantes.setBounds(41, 118, 146, 14);
 		contentPanel.add(cantidadHabitantes);
 		
-		JComboBox<String> comboBoxHabitantes = new JComboBox<>();
+		comboBoxHabitantes = new JComboBox<>();
 		comboBoxHabitantes.setBounds(197, 115, 200, 20);
 		comboBoxHabitantes.setBackground(Color.WHITE);
 		comboBoxHabitantes.setModel(new DefaultComboBoxModel<String>(new String[] {"(seleccione una opci\u00F3n)", "menos de 1000", "2000-3000", "4000-5000", "6000-7000", "8000-9000", "m\u00E1s de 10.000"}));
@@ -104,7 +99,7 @@ public class Localidad extends JDialog {
 	}
 	
 	public void validarDatos(){
-		if(textLocalidad.getText().equals("") || textProvincia.getText().equals("")){
+		if(textLocalidad.getText().equals("") || textProvincia.getText().equals("") || comboBoxHabitantes.getSelectedItem().equals(null)){
 			JOptionPane.showMessageDialog(null,"Es obligatorio la carga de todos los datos", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 			validandoDatos=false;
 		}else{

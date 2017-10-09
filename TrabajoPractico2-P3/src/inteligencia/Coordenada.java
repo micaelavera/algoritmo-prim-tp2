@@ -1,6 +1,8 @@
 package inteligencia;
 
-public class Coordenada {
+import org.openstreetmap.gui.jmapviewer.Coordinate;
+
+public class Coordenada{
 
 	private double latitud;
 	private double longitud;
@@ -22,11 +24,5 @@ public class Coordenada {
 		return longitud;
 	}
 
-	
-	
-	
-	
-	
-	
 	
 }
