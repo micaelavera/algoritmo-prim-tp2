@@ -99,7 +99,7 @@ public class Localidad extends JDialog {
 	}
 	
 	public void validarDatos(){
-		if(textLocalidad.getText().equals("") || textProvincia.getText().equals("") || comboBoxHabitantes.getSelectedItem().equals(null)){
+		if(textLocalidad.getText().equals("") || textProvincia.getText().equals("")){ //Falta validar el comboBoxHabitantes
 			JOptionPane.showMessageDialog(null,"Es obligatorio la carga de todos los datos", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 			validandoDatos=false;
 		}else{

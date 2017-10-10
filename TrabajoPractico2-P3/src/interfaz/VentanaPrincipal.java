@@ -116,13 +116,13 @@ public class VentanaPrincipal {
 		mapa.addMouseListener(new MouseAdapter() {
 		@Override
         public void mouseClicked(MouseEvent e) {
-			if(ingresarPunto==true){
-				if (e.getButton() == MouseEvent.BUTTON1) {
+			
+				if (e.getButton() == MouseEvent.BUTTON1 && ingresarPunto==true) {
 					grafo.getCoordenadas().add(mapa.getPosition(e.getPoint()));
 					grafo.agregarLocalidad();
 					ingresarPunto=false;
                 }	
-			}
+			
 		}
 			
 		});
