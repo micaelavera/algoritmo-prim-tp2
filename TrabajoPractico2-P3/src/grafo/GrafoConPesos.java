@@ -17,7 +17,5 @@ public class GrafoConPesos
 		pesos[i][j]=peso;
 		pesos[j][i]=peso;
 	}
-		
-	
 
 }
