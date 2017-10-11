@@ -18,4 +18,19 @@ public class GrafoConPesos
 		pesos[j][i]=peso;
 	}
 
+	public boolean existeArista(int i, int j){
+		return grafo.existeArista(i, j);
+	}
+
+    public double getPeso(int i, int j){
+		verificarArista(i, j,"consultar el peso");
+		return pesos[i][j];		
+	}
+
+  //Lanza una excepcion si se consulta el peso de una arista inexistente
+	private void verificarArista(int i, int j, String accion) {
+		if(!grafo.existeArista(i, j)){
+			throw new IllegalArgumentException("Se intento "+ accion+ " de una arista inexistente. Vertices:" + i + ", " + j);
+		}
+	}
 }
