@@ -37,7 +37,7 @@ public class Mapa {
 			Coordinate puntoActual=coordenadas.get(i);
 			MapMarkerDot marker=new MapMarkerDot(puntoActual);
 			marker.getStyle().setBackColor(color);
-			marker.setName(localidad.getTextLocalidad().getText());
+//			marker.setName(localidad.getTextLocalidad().getText());
 			mapa.addMapMarker(marker);		
 			}
 		}	
