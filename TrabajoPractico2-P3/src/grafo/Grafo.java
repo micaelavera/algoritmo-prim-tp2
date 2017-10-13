@@ -42,9 +42,9 @@ public class Grafo {
 		vecinos.get(j).remove(i);
 	}
 	
-	//Grado de un vertice (cantidad de vecinos) 
+	//Grado de un vertice (cantidad de vecinos)
 	public int grado(int i){
-		return vecinos.get(i).size();
+		return vecinos(i).size();
 	}
 	
 	// Conjunto de vecinos de un vertice
@@ -61,8 +61,8 @@ public class Grafo {
 	
 	//Lanza una excepcion si el indice v esta fuera de rango para los vertices
 	private void verificarVertice(int v, String accion){
-		if(v<0 || v>=vertices()){
-			throw new IllegalArgumentException("Se intento"+ accion +" con un indice inexistente. Vertice=" + v );
+		if (v<0 || v>=vertices()){
+			throw new IllegalArgumentException("Se intento "+ accion +" con un indice inexistente. Vertice=" + v );
 		}
 	}
 	//Lanza una excepcion si los indices son iguales
