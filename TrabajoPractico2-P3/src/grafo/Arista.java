@@ -2,7 +2,7 @@ package grafo;
 
 public class Arista {
 	
-	private int origen;
+	public int origen;
 	private int destino;
 	private double peso;
 	
@@ -12,8 +12,7 @@ public class Arista {
 		this.destino=destino;
 		this.peso=peso;
 	}
-
-
+	
 	public int getOrigen() {
 		return origen;
 	}

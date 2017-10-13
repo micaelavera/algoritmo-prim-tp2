@@ -1,5 +1,7 @@
 package grafo;
 
+import java.util.Set;
+
 import grafo.Grafo;
 
 public class GrafoConPesos 
@@ -14,6 +16,7 @@ public class GrafoConPesos
 	
 	public void agregarArista(int i,int j, double peso){
 		grafo.agregarArista(i, j);
+		verificarPeso(peso,"agregar un peso");
 		pesos[i][j]=peso;
 		pesos[j][i]=peso;
 	}
@@ -22,15 +25,38 @@ public class GrafoConPesos
 		return grafo.existeArista(i, j);
 	}
 
-    public double getPeso(int i, int j){
+    public double consultarPeso(int i, int j){
 		verificarArista(i, j,"consultar el peso");
 		return pesos[i][j];		
 	}
 
+ 	public int vertices(){
+ 		return grafo.vertices();
+ 	}
+ 	
+ 	public Set<Integer> vecinos(int i){
+		return grafo.vecinos(i);
+	}
+
+    //Lanza una excepcion si se agrega un peso negativo
+    private void verificarPeso(double peso,String accion){
+    	if (peso<0){
+    		throw new IllegalArgumentException("Se intento "+ accion +" negativo.Peso: "+peso);
+    	}
+    }
+    
   //Lanza una excepcion si se consulta el peso de una arista inexistente
 	private void verificarArista(int i, int j, String accion) {
 		if(!grafo.existeArista(i, j)){
 			throw new IllegalArgumentException("Se intento "+ accion+ " de una arista inexistente. Vertices:" + i + ", " + j);
 		}
+	}
+	
+	
+	public static void main(String []args){
+		GrafoConPesos g=new GrafoConPesos(5);
+		g.agregarArista(2, 3, 2);
+		g.agregarArista(2, 1, 0);
+		System.out.println(g.vecinos(2));
 	}
 }
