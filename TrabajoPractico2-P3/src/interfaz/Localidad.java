@@ -2,6 +2,7 @@ package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Toolkit;
 
 import javax.swing.DefaultComboBoxModel;
@@ -22,11 +23,10 @@ public class Localidad extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textProvincia;
-	private static JTextField textLocalidad;
+	private JComboBox<String> comboBoxProvincias;
+	private JTextField textLocalidad;
 	private JComboBox<String> comboBoxHabitantes; 
-	private boolean validandoDatos;
-	
+		
 	public static void main(String[] args) {
 		try {
 			Localidad dialog = new Localidad();
@@ -48,44 +48,47 @@ public class Localidad extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
-		validandoDatos=false;
 		setModal(true);
-		
 		{
-			JButton botonCargarDatos = new JButton("Cargar datos");
-			botonCargarDatos.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					validarDatos();
-					if(validandoDatos==true){
-						dispose();
-						JOptionPane.showMessageDialog(null, "Marque en el mapa las coordenadas","Mensaje",JOptionPane.INFORMATION_MESSAGE);	
-					}	
-					
-				}
-			});
-			botonCargarDatos.setBounds(182, 166, 118, 23);
-			contentPanel.add(botonCargarDatos);
-			getRootPane().setDefaultButton(botonCargarDatos);
+			
+		JButton botonCargarDatos = new JButton("Cargar datos");
+		botonCargarDatos.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			if(validarDatos()==true){
+			dispose();
+			JOptionPane.showMessageDialog(null, "Marque en el mapa las coordenadas","Mensaje",JOptionPane.INFORMATION_MESSAGE);	
+			}	
+		}
+		});
+		botonCargarDatos.setBounds(182, 166, 118, 23);
+		contentPanel.add(botonCargarDatos);
+		getRootPane().setDefaultButton(botonCargarDatos);
 		}
 		
 		JLabel provincia = new JLabel("Ingrese provincia:");
 		provincia.setBounds(41, 35, 146, 14);
 		contentPanel.add(provincia);
 		
-		textProvincia = new JTextField();
-		textProvincia.setBounds(197, 32, 200, 20);
-		contentPanel.add(textProvincia);
-		textProvincia.setColumns(10);
+		comboBoxProvincias = new JComboBox<>();
+		comboBoxProvincias.setBounds(197, 32, 200, 20);
+		comboBoxProvincias.setBackground(Color.WHITE);
+		comboBoxProvincias.setModel(new DefaultComboBoxModel<String>(new String[] {"(seleccione una provincia)", 
+				"Buenos Aires","Catamarca","Chaco", "Chubut", "Córdoba","Corrientes", "Entre Ríos", "Formosa",
+				"Jujuy","La Pampa","La Rioja","Mendoza","Misiones", "Neuquén","Río Negro","Salta","San Juan",
+				"San Luis","Santa Cruz","Santa Fe", "Santiago del Estero", "Tierra del Fuego", "Tucumán"}));
+		
+		contentPanel.add(comboBoxProvincias);
+	
 		
 		JLabel localidad = new JLabel("Ingrese localidad:");
 		localidad.setBounds(41, 76, 146, 14);
 		contentPanel.add(localidad);
 		
 		textLocalidad = new JTextField();
-		textLocalidad.setBounds(197, 70, 200, 20);
+		textLocalidad.setBounds(197, 73, 200, 20);
 		contentPanel.add(textLocalidad);
 		textLocalidad.setColumns(10);
+	
 		
 		JLabel cantidadHabitantes = new JLabel("Cantidad de habitantes:");
 		cantidadHabitantes.setBounds(41, 118, 146, 14);
@@ -98,16 +101,19 @@ public class Localidad extends JDialog {
 		contentPanel.add(comboBoxHabitantes);
 	}
 	
-	public void validarDatos(){
-		if(textLocalidad.getText().equals("") || textProvincia.getText().equals("")){ //Falta validar el comboBoxHabitantes
+	public boolean validarDatos(){
+		boolean ret=true;
+		if(textLocalidad.getText().equals("") || comboBoxProvincias.getSelectedIndex()==0|| 
+			comboBoxHabitantes.getSelectedIndex()==0){ 
 			JOptionPane.showMessageDialog(null,"Es obligatorio la carga de todos los datos", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-			validandoDatos=false;
-		}else{
-			validandoDatos=true;
+			ret=false;
 		}
+		return ret;
 	}
 
 	public JTextField getTextLocalidad() {
 		return textLocalidad;
 	}
+
+	
 }
