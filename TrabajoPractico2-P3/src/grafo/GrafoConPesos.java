@@ -38,7 +38,7 @@ public class GrafoConPesos
 		return grafo.vecinos(i);
 	}
 
-    //Lanza una excepcion si se agrega un peso negativo
+    //Lanza una excepcion si se agrega arista con un peso negativo
     private void verificarPeso(double peso,String accion){
     	if (peso<0){
     		throw new IllegalArgumentException("Se intento "+ accion +" negativo.Peso: "+peso);
@@ -50,13 +50,5 @@ public class GrafoConPesos
 		if(!grafo.existeArista(i, j)){
 			throw new IllegalArgumentException("Se intento "+ accion+ " de una arista inexistente. Vertices:" + i + ", " + j);
 		}
-	}
-	
-	
-	public static void main(String []args){
-		GrafoConPesos g=new GrafoConPesos(5);
-		g.agregarArista(2, 3, 2);
-		g.agregarArista(2, 1, 0);
-		System.out.println(g.vecinos(2));
 	}
 }

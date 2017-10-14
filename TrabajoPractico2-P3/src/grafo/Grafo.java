@@ -7,7 +7,7 @@ import java.util.Set;
 public class Grafo {
 
 	//Representacion del grafo por lista de vecinos
-	private ArrayList<HashSet<Integer> > vecinos;
+	private ArrayList<HashSet<Integer>> vecinos;
 	
 	//El numero de vertices queda fijado en el constructor
 	public Grafo(int cantVertices){

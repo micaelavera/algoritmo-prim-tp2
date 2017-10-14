@@ -31,6 +31,8 @@ public class AristaGrafica {
         coordenadas2.add(origen);
 
         MapPolygon polygon = new MapPolygonImpl(coordenadas2);
+        /*-- Crea un poligono que en realidad va a tener --*/
+		/*-- forma de una linea --*/
         mapa.addMapPolygon(polygon);
 
     }

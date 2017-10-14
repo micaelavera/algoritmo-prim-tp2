@@ -1,5 +1,7 @@
 package grafo;
 
+import java.util.Objects;
+
 public class Arista {
 	
 	public int origen;
@@ -27,5 +29,19 @@ public class Arista {
 		return peso;
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+
+		if (obj == null)
+			return false;
+
+		if (obj instanceof Arista) {
+			Arista otra = (Arista) obj;
+			if (Objects.equals (origen, otra.origen) && Objects.equals (destino, otra.destino))
+				return true;
+		}
+		return false;
+	}
 }

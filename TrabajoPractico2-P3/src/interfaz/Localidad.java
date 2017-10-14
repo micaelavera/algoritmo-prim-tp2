@@ -24,7 +24,7 @@ public class Localidad extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JComboBox<String> comboBoxProvincias;
-	private JTextField textLocalidad;
+	public JTextField textLocalidad;
 	private JComboBox<String> comboBoxHabitantes; 
 		
 	public static void main(String[] args) {
@@ -84,7 +84,8 @@ public class Localidad extends JDialog {
 		localidad.setBounds(41, 76, 146, 14);
 		contentPanel.add(localidad);
 		
-		textLocalidad = new JTextField();
+		textLocalidad = new JTextField("");
+		textLocalidad.setText("");
 		textLocalidad.setBounds(197, 73, 200, 20);
 		contentPanel.add(textLocalidad);
 		textLocalidad.setColumns(10);
@@ -97,13 +98,14 @@ public class Localidad extends JDialog {
 		comboBoxHabitantes = new JComboBox<>();
 		comboBoxHabitantes.setBounds(197, 115, 200, 20);
 		comboBoxHabitantes.setBackground(Color.WHITE);
-		comboBoxHabitantes.setModel(new DefaultComboBoxModel<String>(new String[] {"(seleccione una opci\u00F3n)", "menos de 1000", "2000-3000", "4000-5000", "6000-7000", "8000-9000", "m\u00E1s de 10.000"}));
+		comboBoxHabitantes.setModel(new DefaultComboBoxModel<String>(new String[] {"(seleccione una opci\u00F3n)", "menos de 1000",
+				"2000-3000", "4000-5000","6000-7000", "8000-9000", "m\u00E1s de 10.000"}));
 		contentPanel.add(comboBoxHabitantes);
 	}
 	
 	public boolean validarDatos(){
 		boolean ret=true;
-		if(textLocalidad.getText().equals("") || comboBoxProvincias.getSelectedIndex()==0|| 
+		if(textLocalidad.getText().equals("") || comboBoxProvincias.getSelectedIndex()==0 || 
 			comboBoxHabitantes.getSelectedIndex()==0){ 
 			JOptionPane.showMessageDialog(null,"Es obligatorio la carga de todos los datos", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
 			ret=false;
