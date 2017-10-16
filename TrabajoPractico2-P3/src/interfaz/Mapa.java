@@ -29,6 +29,8 @@ public class Mapa {
 	private JMapViewer mapa;
 	private GrafoConPesos AGM,grafoCompleto;
 	Localidad localidad;
+	
+	private double costo;
 
 
 	public Mapa(VentanaPrincipal ventana){
@@ -42,7 +44,7 @@ public class Mapa {
 
 	
 
-	// Se añade al mapa un punto nuevo, en la posicion del mouse.
+	// Se aï¿½ade al mapa un punto nuevo, en la posicion del mouse.
 	// A medida que se van agregando los puntos en el mapa se los guarda en un array de coordenadas.
 	public void agregarLocalidad(){  
 		if(coordenadas!=null){
@@ -73,7 +75,7 @@ public class Mapa {
 
 //	//Calcula la distancia entre dos coordenadas georgraficas
 	public static double calcularDistanciaCoordenadas(Coordinate origen, Coordinate destino) {  
-       double radioTierra = 6371;//en kilómetros  
+       double radioTierra = 6371;//en kilï¿½metros  
         double dLat = Math.toRadians(destino.getLat() - origen.getLat());  
         double dLng = Math.toRadians(destino.getLon() - origen.getLon());  
         double sindLat = Math.sin(dLat / 2);  
@@ -115,6 +117,7 @@ public class Mapa {
 	  
 	  
 	  public void toArista(GrafoConPesos gp,JMapViewer mapa){
+		  
 //		  ArrayList<AristaGrafica> arista=new ArrayList<>(gp.vertices());
 		  for(int i=0;i<gp.vertices();++i){
 			  Set<Integer> vecinos=gp.vecinos(i);
@@ -124,10 +127,16 @@ public class Mapa {
 				  AristaGrafica arista=new AristaGrafica(cor1,cor2);
 				  calcularCosto(cor1,cor2);
 				  arista.poligono(mapa);
+				  costo=calcularCosto(cor1,cor2);
 				  }
 				  
 			  }
 		  }
+	  
+	  public double getCosto()
+	  {
+		  return costo;
+	  }
 		
 		  
 	  
@@ -182,7 +191,7 @@ public class Mapa {
 		int i=0;
 		while(i<coordenadas.size()){
 		for(Coordinate e :coordenadas){
-			coord=coord+"Localidad N°="+i+" Latitud:"+ e.getLat()+" Longitud:"+e.getLon()+"\n";
+			coord=coord+"Localidad Nï¿½="+i+" Latitud:"+ e.getLat()+" Longitud:"+e.getLon()+"\n";
 			i++;
 		}
 		}
