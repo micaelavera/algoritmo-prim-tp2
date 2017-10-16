@@ -1,10 +1,11 @@
-package inteligencia;
+package mapeo;
 
 import java.io.Serializable;
 
 public class Coordenada implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	private int id;
 	private String nombre;
 	private double latitud;
 	private double longitud;
@@ -13,12 +14,15 @@ public class Coordenada implements Serializable{
 		this.latitud=0.0;
 		this.longitud=0.0;
 	}
-	public Coordenada(String nombre,double lat,double lon){
+	public Coordenada(int id,String nombre,double lat,double lon){
 		this.nombre=nombre;
 		this.latitud=lat;
 		this.longitud=lon;
 	}
 
+	public int getId() {
+		return id;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -31,7 +35,7 @@ public class Coordenada implements Serializable{
 	}
 	
 	public Coordenada clonar(){
-		return new Coordenada(nombre, latitud, longitud);
+		return new Coordenada(id, nombre, latitud, longitud);
 	}
 	@Override
 	public String toString() {

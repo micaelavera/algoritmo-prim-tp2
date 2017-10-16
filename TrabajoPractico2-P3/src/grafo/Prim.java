@@ -19,7 +19,7 @@ public class Prim {
 		return _grafo;
 	}
 
-	private static Arista menorArista(GrafoConPesos grafo,Set<Integer> verticesVisitados) {
+	public static Arista menorArista(GrafoConPesos grafo,Set<Integer> verticesVisitados) {
 		Arista ret = new Arista(0, 0, Double.MAX_VALUE);
 		for(Integer i: verticesVisitados)
 			for (Integer j : grafo.vecinos(i))

@@ -24,7 +24,9 @@ public class Localidad extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JComboBox<String> comboBoxProvincias;
-	public JTextField textLocalidad;
+
+
+	public static JTextField textLocalidad;
 	private JComboBox<String> comboBoxHabitantes; 
 		
 	public static void main(String[] args) {
@@ -84,7 +86,7 @@ public class Localidad extends JDialog {
 		localidad.setBounds(41, 76, 146, 14);
 		contentPanel.add(localidad);
 		
-		textLocalidad = new JTextField("");
+		textLocalidad = new JTextField();
 		textLocalidad.setText("");
 		textLocalidad.setBounds(197, 73, 200, 20);
 		contentPanel.add(textLocalidad);
@@ -116,6 +118,8 @@ public class Localidad extends JDialog {
 	public JTextField getTextLocalidad() {
 		return textLocalidad;
 	}
-
+	public JComboBox<String> getComboBoxProvincias() {
+		return comboBoxProvincias;
+	}
 	
 }

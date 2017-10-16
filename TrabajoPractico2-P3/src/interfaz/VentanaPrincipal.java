@@ -1,45 +1,12 @@
 package interfaz;
 
-
 import java.awt.EventQueue;
 import java.awt.Toolkit;
-
 import javax.swing.JFrame;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
-
-
-
-
-import org.openstreetmap.gui.jmapviewer.JMapViewerTree;
-import org.openstreetmap.gui.jmapviewer.MapMarkerCircle;
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
-import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
-import org.openstreetmap.gui.jmapviewer.tilesources.BingAerialTileSource;
-import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
-
-import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JButton;
-
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -49,35 +16,32 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
-
-
-
-
-
 import grafo.GrafoConPesos;
+import grafo.Prim;
 import interfaz.Mapa;
-
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
-
 import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class VentanaPrincipal{
 
 	private JFrame frame;
 	private JMapViewer mapa;
-//	static JMapViewerTree mapViewerTree;
 	private Mapa interfaz;
 	private boolean ingresarPunto;
 	private JTextField textLatitud;
 	private JTextField textLongitud;
-	private GrafoConPesos AGM;
 	private JTextField textCosto;
-
+	private Coordinate posicionActualMapa;
+	private GrafoConPesos AGM,GrafoCompleto;
 	
 	/**
 	 * Launch the application.
@@ -109,6 +73,7 @@ public class VentanaPrincipal{
 		frame = new JFrame("Conexiones telefónicas");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaPrincipal.class.getResource("/imagenes/icono_telefono.png")));
 		frame.setBounds(0,10, 1314, 725);
+		
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -173,6 +138,7 @@ public class VentanaPrincipal{
 		textCosto = new JTextField();
 		textCosto.setEnabled(false);
 		textCosto.setEditable(false);
+		
 		textCosto.setHorizontalAlignment(SwingConstants.CENTER);
 		textCosto.setBounds(975, 606, 122, 57);
 		frame.getContentPane().add(textCosto);
@@ -190,10 +156,24 @@ public class VentanaPrincipal{
 
 		JButton botonAGM = new JButton("Calcular AGM");
 		botonAGM.addActionListener(new ActionListener() {
+			@Override
+			/**
+			 * Si se presiona el boton obtener el arbol generador minimo, se intentara pedirle dicha funcion a la interfaz.
+			 * En caso de que la misma devuelva una excepcion, se mostrara el cartel con el error.
+			 */
 			public void actionPerformed(ActionEvent e) {
-				interfaz.cargarGrafo(interfaz.getCoordenadas());
-				
+				//Calcula el algoritmo de Prim de todos los vertices que se agregaron
+				AGM=Prim.AGM(interfaz.cargarGrafo(interfaz.getCoordenadas()));
+				interfaz.toArista(AGM, mapa); //Dibuja las aristas del anterior grafo cargado 
+			
 			}
+//				try{
+////					interfaz.obtenerArbolGeneradorMinimo(mapa);
+//				}
+//				catch (Exception exception){
+//					mostrarError(exception.getMessage());
+//				}
+//			}
 		});
 		botonAGM.setBounds(332, 554, 161, 23);
 		botonAGM.setFont(new Font("Consolas", Font.PLAIN, 12));
@@ -206,27 +186,40 @@ public class VentanaPrincipal{
 		lblNewLabel.setBounds(10, 529, 1274, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
-
-		JComboBox <TileSource> tileSourceSelector = new JComboBox <>(new TileSource[]{
-		new OsmTileSource.Mapnik(), new OsmTileSource.CycleMap(),
-	    new BingAerialTileSource(),
+		JButton btnCalcularGrafoCompleto = new JButton("Calcular Grafo Completo");
+		btnCalcularGrafoCompleto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GrafoCompleto=interfaz.cargarGrafo(interfaz.getCoordenadas());
+				interfaz.toArista(GrafoCompleto, mapa);
+			}
 		});
-
-	    tileSourceSelector.addItemListener(new ItemListener() {
-	    @Override
-	     public void itemStateChanged(ItemEvent e) {
-	      mapa.setTileSource((TileSource) e.getItem());
-	       }
-	     });
-		tileSourceSelector.setBounds(34, 11, 92, 20);
-		mapa.add(tileSourceSelector);
-
+		btnCalcularGrafoCompleto.setFont(new Font("Consolas", Font.PLAIN, 12));
+		btnCalcularGrafoCompleto.setBounds(332, 605, 223, 23);
+		frame.getContentPane().add(btnCalcularGrafoCompleto);
 		
+
+//		JComboBox <TileSource> tileSourceSelector = new JComboBox <>(new TileSource[]{
+//		new OsmTileSource.Mapnik(), new OsmTileSource.CycleMap(),
+//	    new BingAerialTileSource(),
+//		});
+//
+//	    tileSourceSelector.addItemListener(new ItemListener() {
+//	    @Override
+//	     public void itemStateChanged(ItemEvent e) {
+//	      mapa.setTileSource((TileSource) e.getItem());
+//	       }
+//	     });
+//		tileSourceSelector.setBounds(34, 11, 92, 20);
+//		mapa.add(tileSourceSelector);
+
 		mapa.addMouseMotionListener(new MouseAdapter() {
+		
+
 		@Override
         public void mouseMoved(MouseEvent e) {
-           textLatitud.setText("" + mapa.getPosition(e.getPoint()).getLat());
-           textLongitud.setText("" + mapa.getPosition(e.getPoint()).getLon());
+			posicionActualMapa = mapa.getPosition(e.getPoint());
+			textLatitud.setText("" + posicionActualMapa.getLat());
+	        textLongitud.setText("" + posicionActualMapa.getLon());
             }
         });
 
@@ -235,7 +228,7 @@ public class VentanaPrincipal{
 		@Override
         public void mouseClicked(MouseEvent e) {
 			if (e.getButton() == MouseEvent.BUTTON1 && ingresarPunto==true) {
-				interfaz.getCoordenadas().add(mapa.getPosition(e.getPoint())); //agrega el punto en el array de coordenadas
+				interfaz.getCoordenadas().add(posicionActualMapa);
 				interfaz.agregarLocalidad();
 				System.out.println(interfaz.toString());
 				ingresarPunto=false;
@@ -243,8 +236,38 @@ public class VentanaPrincipal{
 		}
 		});
 	}
+	
+	
+//	private void seleccionandoRuta() {
+//		for (MapMarker punto: mapa.getMapMarkerList()){
+//
+//			if ( !puntosSeleccionados.contains(punto)){
+//				this.puntosSeleccionados.add(punto);
+////				campoCoord1.setText(Interfaz.round(posicionActualMapa.getLat(), 4) +"; "+ Interfaz.round(posicionActualMapa.getLon(), 4));
+//			}
+//		}
+//		if (this.puntosSeleccionados.size()>=2){
+//			dibujarLineaEntrePuntosSeleccionados();
+////			deseleccionarPuntos();
+//		}
+//	}
+//	
+//	private void dibujarLineaEntrePuntosSeleccionados() {
+//		Coordinate inicio = this.puntosSeleccionados.get(0).getCoordinate();
+//		Coordinate destino = this.puntosSeleccionados.get(1).getCoordinate();
+//		dibujarLineaEntrePuntos(inicio, destino, null, mapa);
+//	}
+	
+ 
 
+	
+	
 	public JMapViewer getMapa() {
 		return mapa;
+	}
+	
+	
+	private void mostrarError(String message){
+		JOptionPane.showMessageDialog(frame, message);
 	}
 }
