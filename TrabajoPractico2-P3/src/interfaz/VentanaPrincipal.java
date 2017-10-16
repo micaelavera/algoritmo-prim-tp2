@@ -2,11 +2,15 @@ package interfaz;
 
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+
 import javax.swing.JFrame;
+
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
+
 import javax.swing.border.EtchedBorder;
 import javax.swing.JButton;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -16,15 +20,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
 import grafo.GrafoConPesos;
 import grafo.Prim;
 import interfaz.Mapa;
+
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,9 +46,10 @@ public class VentanaPrincipal{
 	private boolean ingresarPunto;
 	private JTextField textLatitud;
 	private JTextField textLongitud;
-	private JTextField textCosto;
+	private JLabel textCosto;
 	private Coordinate posicionActualMapa;
 	private GrafoConPesos AGM,GrafoCompleto;
+	private double costo;
 	
 	/**
 	 * Launch the application.
@@ -70,7 +78,7 @@ public class VentanaPrincipal{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("Conexiones telefónicas");
+		frame = new JFrame("Conexiones telefï¿½nicas");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaPrincipal.class.getResource("/imagenes/icono_telefono.png")));
 		frame.setBounds(0,10, 1314, 725);
 		
@@ -135,13 +143,17 @@ public class VentanaPrincipal{
 		lblCostoTotal.setFont(new Font("Consolas", Font.BOLD, 15));
 		frame.getContentPane().add(lblCostoTotal);
 	
-		textCosto = new JTextField();
+		
+		textCosto = new JLabel();
 		textCosto.setEnabled(false);
-		textCosto.setEditable(false);
+		textCosto.setFocusable(false);
+		
 		
 		textCosto.setHorizontalAlignment(SwingConstants.CENTER);
 		textCosto.setBounds(975, 606, 122, 57);
 		frame.getContentPane().add(textCosto);
+		
+		
 				
 		
 		mapa=new JMapViewer();
@@ -150,7 +162,7 @@ public class VentanaPrincipal{
 		frame.getContentPane().add(mapa);
 		interfaz=new Mapa(this);
 	
-		//Se posiciona en las coordenadas geográficas de Argentina
+		//Se posiciona en las coordenadas geogrï¿½ficas de Argentina
 		mapa.setDisplayPositionByLatLon(-33.123827, -60.354550, 5); 
 		
 
@@ -165,7 +177,8 @@ public class VentanaPrincipal{
 				//Calcula el algoritmo de Prim de todos los vertices que se agregaron
 				AGM=Prim.AGM(interfaz.cargarGrafo(interfaz.getCoordenadas()));
 				interfaz.toArista(AGM, mapa); //Dibuja las aristas del anterior grafo cargado 
-			
+				costo=interfaz.getCosto();
+				textCosto.setText(Integer.toString((int)costo));;
 			}
 //				try{
 ////					interfaz.obtenerArbolGeneradorMinimo(mapa);
