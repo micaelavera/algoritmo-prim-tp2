@@ -2,7 +2,6 @@ package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Toolkit;
 
 import javax.swing.DefaultComboBoxModel;
@@ -24,9 +23,7 @@ public class Localidad extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JComboBox<String> comboBoxProvincias;
-
-
-	public static JTextField textLocalidad;
+	private JTextField textLocalidad;
 	private JComboBox<String> comboBoxHabitantes; 
 		
 	public static void main(String[] args) {
@@ -87,12 +84,10 @@ public class Localidad extends JDialog {
 		contentPanel.add(localidad);
 		
 		textLocalidad = new JTextField();
-		textLocalidad.setText("");
 		textLocalidad.setBounds(197, 73, 200, 20);
 		contentPanel.add(textLocalidad);
-		textLocalidad.setColumns(10);
-	
 		
+	
 		JLabel cantidadHabitantes = new JLabel("Cantidad de habitantes:");
 		cantidadHabitantes.setBounds(41, 118, 146, 14);
 		contentPanel.add(cantidadHabitantes);
@@ -115,11 +110,12 @@ public class Localidad extends JDialog {
 		return ret;
 	}
 
-	public JTextField getTextLocalidad() {
-		return textLocalidad;
+	public String obtenerLocalidad(){ 
+		return textLocalidad.getText(); 
 	}
-	public JComboBox<String> getComboBoxProvincias() {
-		return comboBoxProvincias;
+	
+	public String getComboBoxProvincias() {
+		return (String)comboBoxProvincias.getSelectedItem();
 	}
 	
 }

@@ -9,28 +9,28 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
 
 public class AristaGrafica {
 
-	private Coordinate origen;
-	private Coordinate destino;
+	private Coordenada origen;
+	private Coordenada destino;
 	
-	public AristaGrafica(Coordinate a,Coordinate b){
+	public AristaGrafica(Coordenada a,Coordenada b){
 		verificarCoordenadas(a, b,"agregar coordenadas");
 		this.origen=a;
 		this.destino=b;
 	}
 
-	private void verificarCoordenadas(Coordinate a, Coordinate b,String accion) {
+	private void verificarCoordenadas(Coordenada a, Coordenada b,String accion) {
 		if(a==null || b==null){
 			 throw new RuntimeException("Se intento "+accion+" nulas");
 		}
 	}
 	
-	public void poligono(JMapViewer mapa) {
-        ArrayList<Coordinate> coordenadas2 = new ArrayList<> ();
-        coordenadas2.add(origen);
-        coordenadas2.add(destino);
-        coordenadas2.add(origen);
+	public void agregarRuta(JMapViewer mapa) {
+        ArrayList<Coordinate> rutaMapa = new ArrayList<> ();
+        rutaMapa.add(new Coordinate(origen.getLatitud(),origen.getLongitud()));
+        rutaMapa.add(new Coordinate(destino.getLatitud(),destino.getLongitud()));
+        rutaMapa.add(new Coordinate(origen.getLatitud(),origen.getLongitud()));
 
-        MapPolygon polygon = new MapPolygonImpl(coordenadas2);
+        MapPolygon polygon = new MapPolygonImpl(rutaMapa);
         /*-- Crea un poligono que en realidad va a tener --*/
 		/*-- forma de una linea --*/
         mapa.addMapPolygon(polygon);

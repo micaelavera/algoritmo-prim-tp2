@@ -1,6 +1,7 @@
-package grafo;
+package tests;
 
 import static org.junit.Assert.*;
+import grafo.GrafoConPesos;
 
 import org.junit.Test;
 
