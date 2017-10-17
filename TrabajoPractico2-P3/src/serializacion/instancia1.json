@@ -1,0 +1,42 @@
+[
+  {
+  	"provincia": "Buenos Aires",
+    "latitud": -34.52133782929332,
+    "longitud": -58.70068073272705
+  },
+  {
+  	"provincia": "Entre Ríos",
+    "latitud": -31.201365, 
+    "longitud": -59.170625
+  },
+  {
+  	"provincia": "Salta",
+    "latitud": -25.305592, 
+    "longitud": -65.497899 
+  },
+  {
+  	"provincia": "San Juan",
+    "latitud": -29.733931,  
+    "longitud": -69.172341
+  },
+  {
+  	"provincia": "Córdoba",
+  	"latitud": -30.412377,
+  	"longitud": -64.413223
+  },
+  {
+  	"provincia": "Neuquén",
+  	"latitud": -38.039299, 
+  	"longitud": -69.044658
+  },
+  {
+  	"provincia": "La Pampa",
+  	"latitud": -37.434330,
+  	"longitud": -64.888790
+  },
+  {
+ 	"provincia": "Chubut",
+  	"latitud": -43.959626,
+  	"longitud":  -69.046235
+  }
+]

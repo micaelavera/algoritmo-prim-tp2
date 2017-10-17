@@ -4,27 +4,20 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Set;
 
-import javax.swing.JCheckBox;
-import javax.swing.JTextField;
-
-import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
 import grafo.GrafoConPesos;
 import grafo.Prim;
 
-
 public class Mapa {
 	
 	private ArrayList<Coordenada> coordenadas;
 	private GrafoConPesos AGM,grafoCompleto;
-	private Localidad localidad;
 	private double costo;
 	
 	public Mapa(){
 		coordenadas=new ArrayList<>();
-		localidad=new Localidad();
 		costo=0.0;
 	}
 	
@@ -56,7 +49,7 @@ public class Mapa {
 		}
 	}
 	
-	public void cargarGrafoAGM(JMapViewer mapa) throws Exception{
+	private void cargarGrafoAGM(JMapViewer mapa) throws Exception{
 		if(getCoordenadas().size()<2){
 			throw new Exception("Debe ingresar al menos dos localidades");
 		}
@@ -72,6 +65,8 @@ public class Mapa {
 	    	  for (int j = i; j < coordenadas.size(); ++j) {
 	            	if(i!=j){
 	                 grafo.agregarArista(i, j, calcularDistanciaCoordenadas(coordenadas.get(i), coordenadas.get(j)));            		  
+	                 System.out.println(calcularDistanciaCoordenadas(coordenadas.get(i), coordenadas.get(j)));
+	                 calcularCosto(coordenadas.get(i),coordenadas.get(j));   
 	            	}
 	          }  
 	      }
@@ -85,20 +80,15 @@ public class Mapa {
 			  Coordenada cor1=coordenadas.get(i);
 			  for(Integer j: vecinos){
 				  Coordenada cor2=coordenadas.get(j);
-				  
 				  AristaGrafica arista=new AristaGrafica(cor1,cor2);
 				  arista.agregarRuta(mapa);
-				
-				  calcularCosto(cor1,cor2);   
-				 
-			  
 			  }
 		  }
 		  
 	  }
 		
 	//Calcula la distancia entre dos coordenadas georgraficas
-	public static double calcularDistanciaCoordenadas(Coordenada origen, Coordenada destino) {  
+	private static double calcularDistanciaCoordenadas(Coordenada origen, Coordenada destino) {  
 	     double radioTierra = 6371;//en kilómetros  
 	     double dLat = Math.toRadians(destino.getLatitud() - origen.getLatitud());  
 	     double dLng = Math.toRadians(destino.getLongitud()- origen.getLongitud());  
@@ -112,42 +102,27 @@ public class Mapa {
 	     return distancia;  
 	 }  	
 	  
-		public double calcularCosto(Coordenada cor1,Coordenada cor2){
-//			costo=100*calcularDistanciaCoordenadas(cor1,cor2);
-//			if(calcularDistanciaCoordenadas(cor1,cor2)>200){
-//				costo+=50;
-//			} 
-			
-			if ((cor1.getProvincia().equals(cor2.getProvincia()))){
-//				costo+=;
+		private double calcularCosto(Coordenada cor1,Coordenada cor2){
+			costo=100*calcularDistanciaCoordenadas(cor1,cor2);
+			if(calcularDistanciaCoordenadas(cor1,cor2)>200){
+				costo+=50;
+			} 
+			else if (!(cor1.getProvincia().equals(cor2.getProvincia()))){
+				costo+=80;
+			}else{
+				costo=100*calcularDistanciaCoordenadas(cor1,cor2);
 			}
-			
-			
 			return costo;
 			
-			}
-		
-	  
-//	@Override
-//	public String toString() {
-//		String coord="";
-//		int i=0;
-//		while(i<coordenadas.size()){
-//		for(Coordinate e :coordenadas){
-//			coord=coord+"Localidad N°="+i+" Latitud:"+ e.getLat()+" Longitud:"+e.getLon()+"\n";
-//			i++;
-//		}
-//		}
-//		return coord;
-//	}
+		}
 
 	public ArrayList<Coordenada> getCoordenadas(){
 		return coordenadas;
 	}
-	
 	
 	public double getCosto() {
 		return costo;
 	}
 	
 }
+

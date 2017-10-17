@@ -25,6 +25,8 @@ public class Localidad extends JDialog {
 	private JComboBox<String> comboBoxProvincias;
 	private JTextField textLocalidad;
 	private JComboBox<String> comboBoxHabitantes; 
+	private String provincia;
+	private String localidad;
 		
 	public static void main(String[] args) {
 		try {
@@ -57,6 +59,9 @@ public class Localidad extends JDialog {
 			dispose();
 			JOptionPane.showMessageDialog(null, "Marque en el mapa las coordenadas","Mensaje",JOptionPane.INFORMATION_MESSAGE);	
 			}	
+			provincia=(String)comboBoxProvincias.getSelectedItem();
+			localidad=textLocalidad.getText();
+		
 		}
 		});
 		botonCargarDatos.setBounds(182, 166, 118, 23);
@@ -100,6 +105,18 @@ public class Localidad extends JDialog {
 		contentPanel.add(comboBoxHabitantes);
 	}
 	
+	public JTextField getTextLocalidad() {
+		return textLocalidad;
+	}
+
+	public void setTextLocalidad(JTextField textLocalidad) {
+		this.textLocalidad = textLocalidad;
+	}
+
+	public String getLocalidad() {
+		return localidad;
+	}
+
 	public boolean validarDatos(){
 		boolean ret=true;
 		if(textLocalidad.getText().equals("") || comboBoxProvincias.getSelectedIndex()==0 || 
@@ -110,12 +127,10 @@ public class Localidad extends JDialog {
 		return ret;
 	}
 
-	public String obtenerLocalidad(){ 
-		return textLocalidad.getText(); 
+	public String getProvincia() {
+		return provincia;
 	}
 	
-	public String getComboBoxProvincias() {
-		return (String)comboBoxProvincias.getSelectedItem();
-	}
+
 	
 }
