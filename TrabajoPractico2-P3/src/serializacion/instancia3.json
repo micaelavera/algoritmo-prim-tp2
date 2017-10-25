@@ -1,0 +1,22 @@
+[
+  {
+  	"provincia": "Catamarca",
+    "latitud": -27.010467, 
+    "longitud": -66.843100
+  },
+  {
+  	"provincia": "Río Negro",
+  	"latitud": -41.685895, 
+  	"longitud": -65.869555
+  },
+  {
+  	"provincia": "Neuquén",
+  	"latitud": -38.039299, 
+  	"longitud": -69.044658
+  },
+  {
+  	"provincia": "Tierra del Fuego",
+  	"latitud": -54.017025, 
+  	"longitud": -68.015204
+  }
+]
