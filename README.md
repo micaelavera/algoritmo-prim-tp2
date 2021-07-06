@@ -1,4 +1,4 @@
-# Trabajo Práctico N°2 - Programación 3
+# Conexiones telefónicas - Trabajo práctico
 
 ## Descripción
 El trábajo práctico consiste en implementar una aplicación denominada _“Conexiones telefónicas”_ cuyo objetivo es planificar conexiones telefónicas 
