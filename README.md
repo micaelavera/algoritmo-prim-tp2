@@ -1,7 +1,7 @@
 # Trabajo Práctico N°2 - Programación 3
 
 ## Descripción
-El trábajo práctico consiste en implementar una aplicación denominada “Conexiones telefónicas” cuyo objetivo es planificar conexiones telefónicas 
+El trábajo práctico consiste en implementar una aplicación denominada _“Conexiones telefónicas”_ cuyo objetivo es planificar conexiones telefónicas 
 entre localidades ubicadas en regiones despobladas. Dado un conjunto de localidades, se debe proporcionar el **Árbol Generador Mínimo (AGM)** entre ellas e informar el costo de la solución.
 
 La aplicación debe permitir al usuario registrar una serie de localidades, incluyendo el nombre, provincia, cantidad de habitantes, latitud y longitud de cada una.
