@@ -1,4 +1,4 @@
-# Conexiones telefónicas - Trabajo práctico
+# Conexiones telefónicas
 
 ## Descripción
 El trábajo práctico consiste en implementar una aplicación denominada _“Conexiones telefónicas”_ cuyo objetivo es planificar conexiones telefónicas 
