@@ -25,7 +25,7 @@ Además, se deben proporcionar los siguientes costos:
 |   └── Prim.java
 ├── imagenes
 |   └── icono_telefono.png
-|   └──icono_ubicacion.png
+|   └── icono_ubicacion.png
 ├── interfaz
 │   └── AristaGrafica.java
 |   └── Coordenada.java
@@ -38,11 +38,11 @@ Además, se deben proporcionar los siguientes costos:
 |    └── instancia2.json
 |    └── instancia3.json
 └──  tests
-    └── Assert.java
-    └── GrafoConPesosTest.java
-    └── GrafoTest.java
-    └── MapaTest.java
-    └── PrimTest.java
+     └── Assert.java
+     └── GrafoConPesosTest.java
+     └── GrafoTest.java
+     └── MapaTest.java
+     └── PrimTest.java
 ```
 ## Autoras
 - Micaela Vera
