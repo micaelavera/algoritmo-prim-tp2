@@ -22,17 +22,28 @@ Además, se deben proporcionar los siguientes costos:
 │   └── Arista.java 
 │   └── Grafo.java
 |   └── GrafoConPesos.java
-|   └── Prim.java 
+|   └── Prim.java
+├── imagenes
+|   └── icono_telefono.png
+|   └──icono_ubicacion.png
 ├── interfaz
 │   └── AristaGrafica.java
 |   └── Coordenada.java
 |   └── Localidad.java
 |   └── Mapa.java
 |   └── VentanaPrincipal.java
-├── tests
-    ├── 
+├── serializacion
+|    └── Manager.java
+|    └── instancia1.json
+|    └── instancia2.json
+|    └── instancia3.json
+└──  tests
+    └── Assert.java
+    └── GrafoConPesosTest.java
+    └── GrafoTest.java
+    └── MapaTest.java
+    └── PrimTest.java
 ```
-
 ## Autoras
 - Micaela Vera
 - Liz Moreno López
